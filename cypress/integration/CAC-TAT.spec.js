@@ -163,17 +163,17 @@ describe('Central de Atendimento ao Cliente TAT', function() {
     })
 
     //// FAZENDO UPLOAD DE ARQUIVOS ATRAVÉS DO INPUT
-    it('Ex14 - Seleciona um arquivo da pasta fixtures', function(){
+    it.only('Ex14 - Seleciona um arquivo da pasta fixtures', function(){
         //cypress/fixtures/example.json
-        cy.get('input[id="file-upload"]').selectFile('../Desktop/Carlos Silva Souza.pdf')
+        cy.get('input[id="file-upload"]').selectFile('./cypress/fixtures/example.json')
         .should(function($input) {
-            expect($input[0].files[0].name).to.equal('Carlos Silva Souza.pdf')
+            expect($input[0].files[0].name).to.equal('example.json')
         });
     })
-    it('Ex15 - Seleciona um arquivo simulando um drag-and-drop', function(){
-        cy.get('input[id="file-upload"]').selectFile('../Desktop/Carlos Silva Souza.pdf', {action: 'drag-drop'})
+    it.only('Ex15 - Seleciona um arquivo simulando um drag-and-drop', function(){
+        cy.get('input[id="file-upload"]').selectFile('./cypress/fixtures/example.json', {action: 'drag-drop'})
         .should(function($input) {
-            expect($input[0].files[0].name).to.equal('Carlos Silva Souza.pdf')
+            expect($input[0].files[0].name).to.equal('example.json')
         });
     })
     it('Ex16 - Seleciona um arquivo utilizando uma fixture para a qual foi dada um alias', function(){
