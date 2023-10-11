@@ -163,14 +163,14 @@ describe('Central de Atendimento ao Cliente TAT', function() {
     })
 
     //// FAZENDO UPLOAD DE ARQUIVOS ATRAVÉS DO INPUT
-    it.only('Ex14 - Seleciona um arquivo da pasta fixtures', function(){
+    it('Ex14 - Seleciona um arquivo da pasta fixtures', function(){
         //cypress/fixtures/example.json
         cy.get('input[id="file-upload"]').selectFile('./cypress/fixtures/example.json')
         .should(function($input) {
             expect($input[0].files[0].name).to.equal('example.json')
         });
     })
-    it.only('Ex15 - Seleciona um arquivo simulando um drag-and-drop', function(){
+    it('Ex15 - Seleciona um arquivo simulando um drag-and-drop', function(){
         cy.get('input[id="file-upload"]').selectFile('./cypress/fixtures/example.json', {action: 'drag-drop'})
         .should(function($input) {
             expect($input[0].files[0].name).to.equal('example.json')
