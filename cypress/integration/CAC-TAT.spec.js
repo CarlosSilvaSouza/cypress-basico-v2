@@ -11,6 +11,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
 
     })
     it('Ex0 - Preenche os campos obrigatórios e envia o formulário', function() {
+
         cy.get('input[id="firstName"]').type('Carlos')
         .should('have.value', 'Carlos');
 
@@ -24,10 +25,14 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         .should('have.value', 'TESTES CYPRESS');
 
         cy.get('button[type="submit"]').click();
-
+        
+        cy.clock();
         cy.get('span[class="success"]')
         .should('be.visible');
 
+        cy.tick(3000)
+        cy.get('span[class="success"]')
+        .should('not.be.visible');
     })
     it('Ex1 - Delay', function() {
         const longText = 'TESTE / TESTE / TESTE / TESTE / TESTE / TESTE / TESTE / TESTE / TESTE / TESTE / TESTE / TESTE / TESTE / TESTE / TESTE / TESTE / TESTE / TESTE /'
@@ -43,10 +48,14 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.get('textarea[id="open-text-area"]').type('TESTES CYPRESS');
 
         cy.get('button[type="submit"]').click();
-
+        
+        cy.clock();
         cy.get('span[class="error"]')
         .should('be.visible');
 
+        cy.tick(3000)
+        cy.get('span[class="error"]')
+        .should('not.be.visible');
     })
     it('Ex3 - Valida Telefone', function(){
         cy.get('input[id="phone"]').type('TESTE')
@@ -62,8 +71,13 @@ describe('Central de Atendimento ao Cliente TAT', function() {
 
         cy.get('button[type="submit"]').click();
 
+        cy.clock();
         cy.get('span[class="error"]')
         .should('be.visible');
+
+        cy.tick(3000)
+        cy.get('span[class="error"]')
+        .should('not.be.visible');
 
     })
     it('Ex5 - Preenche e limpa os campos nome, sobrenome, email e telefone', function(){
@@ -105,14 +119,25 @@ describe('Central de Atendimento ao Cliente TAT', function() {
     it('Ex6 - exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', function(){
         cy.get('button[type="submit"]').click();
 
+        cy.clock();
         cy.get('span[class="error"]')
         .should('be.visible');
+
+        cy.tick(3000)
+        cy.get('span[class="error"]')
+        .should('not.be.visible');
 
     })
     it('Ex7 - Envia o formuário com sucesso usando um comando customizado', function(){
         cy.fillMandatoryFieldsAndSubmit('Carlos', 'Souza', 'caca.ssouza@hotmail.com', 'TESTE');
+        
+        cy.clock();
         cy.get('span[class="success"]')
         .should('be.visible');
+
+        cy.tick(3000)
+        cy.get('span[class="success"]')
+        .should('not.be.visible');
 
     })
     it('Ex8 - Utilizando CY.CONTAINS ', function(){
