@@ -34,12 +34,15 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.get('span[class="success"]')
         .should('not.be.visible');
     })
+    Cypress._.times(5, function(){
+        
     it('Ex1 - Delay', function() {
         const longText = 'TESTE / TESTE / TESTE / TESTE / TESTE / TESTE / TESTE / TESTE / TESTE / TESTE / TESTE / TESTE / TESTE / TESTE / TESTE / TESTE / TESTE / TESTE /'
         cy.get('textarea[id="open-text-area"]')
         .type(longText, {delay:0})
         .should('have.value', longText)
 
+    })
     })
     it('Ex2 - Exibe mensagem de erro ao submeter o formulário com um email com formatação inválida', function() {
         cy.get('input[id="firstName"]').type('Carlos');
@@ -130,7 +133,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
     })
     it('Ex7 - Envia o formuário com sucesso usando um comando customizado', function(){
         cy.fillMandatoryFieldsAndSubmit('Carlos', 'Souza', 'caca.ssouza@hotmail.com', 'TESTE');
-        
+
         cy.clock();
         cy.get('span[class="success"]')
         .should('be.visible');
@@ -220,5 +223,30 @@ describe('Central de Atendimento ao Cliente TAT', function() {
   it('Ex19 - Testa a página da política de privacidade de forma independente', function(){
     cy.visit('./src/privacy.html').should('be.ok');
     cy.title().should('be.equal', 'Central de Atendimento ao Cliente TAT - Política de privacidade');
+  })
+  it('Ex20 - Exibe e esconde as mensagens de sucesso e erro usando o .invoke', function(){
+    //cy.invoke(show) serve para forçar a exibição de um elemento html
+    //cy.invoke(hide) serve para esconder a exibição de um elemento
+    cy.get('span[class="error"]')
+      .should('not.be.visible')
+      .invoke('show')
+      .should('be.visible')
+      .and('contain', 'Valide os campos obrigatórios!')
+      .invoke('hide')
+      .should('not.be.visible')
+
+  })
+  it('Ex21 - Preenche a area de texto usando o comando invoke', function(){
+    const texto = 'HELLO WORLD - TEXTO PARA PREENCHIMENTO DO TEXTAREA';
+    cy.get('textarea[id="open-text-area"]').invoke('val', texto)
+    .should('have.value', 'HELLO WORLD - TEXTO PARA PREENCHIMENTO DO TEXTAREA');
+  })
+  
+  it.only('Ex22 - Procurando o gato', function(){
+    //cy.contains('🐈').invoke('show')
+    cy.get('#cat').invoke('show')
+    .should('be.visible');
+
+    //cy.invoke() pode ser utilizado para alterar itens do HTML
   })
 })
