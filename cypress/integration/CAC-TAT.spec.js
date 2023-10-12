@@ -242,7 +242,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
     .should('have.value', 'HELLO WORLD - TEXTO PARA PREENCHIMENTO DO TEXTAREA');
   })
   
-  it.only('Ex22 - Procurando o gato', function(){
+  it('Ex22 - Procurando o gato', function(){
     //cy.contains('🐈').invoke('show')
     cy.get('#cat').invoke('show')
     .should('be.visible');
